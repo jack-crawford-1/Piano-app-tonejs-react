@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import * as Tone from 'tone'
 import chords from './Chords'
@@ -27,7 +27,6 @@ function App() {
 
   const [pressedKeys, setPressedKeys] = useState(new Set())
   const [activeChord, setActiveChord] = useState<string | null>(null)
-  const activeKeysRef = useRef<string[]>([])
 
   const handleKeyDown = (event: { key: string }) => {
     const key = event.key.toUpperCase()
@@ -49,54 +48,45 @@ function App() {
     if (chord) {
       playChord(chord)
       setActiveChord(chordKey)
-      clearActiveKeys()
-      setActiveKeys(chord)
+      chord.forEach((note) => {
+        document.querySelector(`[data-note="${note}"]`)?.classList.add('active')
+      })
     }
   }
 
-  const handleKeyUp = () => {
-    clearActiveKeys()
-    setActiveChord(null)
-  }
+  const handleKeyUp = (event: { key: string }) => {
+    const key = event.key.toUpperCase()
 
-  const handleChordClick = (chordKey: string) => {
+    setPressedKeys((prevKeys) => {
+      const newKeys = new Set(prevKeys)
+      newKeys.delete(key)
+      return newKeys
+    })
+
+    let chordKey = key
+    if (pressedKeys.has('7')) {
+      chordKey += '7'
+    } else if (pressedKeys.has('M')) {
+      chordKey += 'm'
+    }
+
     const chord = chords[chordKey]
     if (chord) {
-      playChord(chord)
-      setActiveChord(chordKey)
-      clearActiveKeys()
-      setActiveKeys(chord)
+      setActiveChord(null)
+      chord.forEach((note) => {
+        document
+          .querySelector(`[data-note="${note}"]`)
+          ?.classList.remove('active')
+      })
     }
-  }
-
-  const clearActiveKeys = () => {
-    activeKeysRef.current.forEach((note) => {
-      document
-        .querySelector(`[data-note="${note}"]`)
-        ?.classList.remove('active')
-    })
-    activeKeysRef.current = []
-  }
-
-  const setActiveKeys = (keys: string[]) => {
-    keys.forEach((note) => {
-      document.querySelector(`[data-note="${note}"]`)?.classList.add('active')
-    })
-    activeKeysRef.current = keys
   }
 
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown)
     window.addEventListener('keyup', handleKeyUp)
-    document.querySelectorAll('.chords span').forEach((span) => {
-      span.addEventListener('mouseup', handleKeyUp)
-    })
     return () => {
       window.removeEventListener('keydown', handleKeyDown)
       window.removeEventListener('keyup', handleKeyUp)
-      document.querySelectorAll('.chords span').forEach((span) => {
-        span.removeEventListener('mouseup', handleKeyUp)
-      })
     }
   }, [pressedKeys])
 
@@ -107,11 +97,12 @@ function App() {
           Mini keyboard using
           <img src="./ToneLogo.png" alt="tone.js" className="logo" />
           and React
-          <img src="./ReactLogo.png" alt="react.js" className="react-logo" />
+          <img src="./ReactLogo.png" alt="react.js" className=" react-logo" />
         </h1>
       </div>
       <Keyboard playChord={playChord} />
       <div className="chords">
+        {/* <div>Chords: </div> */}
         {[
           'C',
           'D',
@@ -135,12 +126,7 @@ function App() {
           'Am',
           'Bm',
         ].map((chord) => (
-          <span
-            key={chord}
-            className={activeChord === chord ? 'active' : ''}
-            onMouseDown={() => handleChordClick(chord)}
-            onMouseUp={handleKeyUp}
-          >
+          <span key={chord} className={activeChord === chord ? 'active' : ''}>
             {chord}
           </span>
         ))}
