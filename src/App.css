@@ -1,0 +1,246 @@
+* {
+  background-color: #f3f3f3;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Helvetica Neue', sans-serif;
+  color: #4c4c4c;
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: 500;
+  color: #d469c8;
+  background-color: #000000;
+  text-align: center;
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+  margin: 20px auto;
+  width: fit-content;
+}
+
+.logo {
+  height: 75px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.react-logo {
+  height: 95px;
+}
+
+.piano {
+  text-align: center;
+  padding: 20px;
+}
+
+.keys {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  margin: auto;
+  margin-top: 20px;
+}
+
+.white-key,
+.black-key {
+  position: relative;
+  cursor: pointer;
+  border: 1px solid #000;
+  font-size: small;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding-bottom: 5px;
+  box-shadow: 0 6px 9px #0000004d;
+}
+
+.white-key {
+  background: #fff;
+  width: 60px;
+  height: 220px;
+  z-index: 1;
+}
+
+.white-key:last-child {
+  box-shadow: 0 4px 6px #0000004d, 6px 0 9px #0000004d;
+}
+
+.black-key {
+  background: #000;
+  color: #fff;
+  width: 40px;
+  height: 150px;
+  position: absolute;
+  margin-left: -20px;
+  z-index: 2;
+}
+
+.white-key.active {
+  background-color: #e146ce;
+}
+
+.black-key.active {
+  background-color: #67d7bf;
+}
+
+.key-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.chords {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 1rem;
+  justify-content: center;
+  margin: 30px auto;
+  font-weight: 900;
+  color: #5d5d5d;
+  padding: 20px;
+  max-width: 600px;
+}
+
+.chords span {
+  margin: 5px;
+  padding: 10px 15px;
+  border: 2px solid #5d5d5d;
+  border-radius: 10px;
+  transition: color 0.3s, background-color 0.3s, transform 0.3s;
+  cursor: pointer;
+}
+
+.chords span:hover {
+  transform: scale(1.1);
+}
+
+.chords span.active {
+  color: #ffffff;
+  background-color: #e146ce;
+}
+
+.instructions {
+  text-align: center;
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px #0000001a;
+  max-width: 700px;
+  margin: 20px auto;
+}
+
+.instructions p {
+  font-size: 1.2rem;
+  line-height: 1.5;
+  margin: 10px 0;
+  padding: 10px;
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 1.5rem;
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+
+  .keys {
+    margin-top: 20px;
+    max-width: 90%;
+  }
+
+  .white-key {
+    width: 30px;
+    height: 100px;
+  }
+
+  .black-key {
+    width: 20px;
+    height: 70px;
+    margin-left: -10px;
+  }
+
+  .chords {
+    font-size: 1rem;
+    margin-top: 20px;
+    max-width: fit-content;
+  }
+
+  .logo {
+    width: 80px;
+    height: 30px;
+  }
+
+  .react-logo {
+    visibility: hidden;
+  }
+
+  .instructions p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .keys {
+    max-width: 85%;
+  }
+
+  .white-key {
+    width: 25px;
+    height: 85px;
+  }
+
+  .black-key {
+    width: 15px;
+    height: 55px;
+    margin-left: -7.5px;
+  }
+
+  h1 {
+    font-size: 1.2rem;
+    padding-left: 50px;
+  }
+
+  .instructions p {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 375px) {
+  .keys {
+    max-width: 100%;
+    border: none;
+  }
+
+  .white-key {
+    width: 20px;
+    height: 70px;
+  }
+
+  .black-key {
+    width: 13px;
+    height: 45px;
+    margin-left: -6.5px;
+  }
+
+  h1 {
+    font-size: 1rem;
+    padding: 5px;
+  }
+
+  .instructions p {
+    font-size: 0.8rem;
+  }
+}
