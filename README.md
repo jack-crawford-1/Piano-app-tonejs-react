@@ -7,11 +7,7 @@ It uses React's **state management and event handling** to manage key presses an
 
 ##
 
-To run locally, clone a copy of this repo and run:
 
-```npm install```
-
-```npm run dev```
 
 
 ## How to use:
@@ -36,7 +32,13 @@ To run locally, clone a copy of this repo and run:
 
 ![alt text](image-4.png)
 
+##
 
+To run locally, clone a copy of this repo and run:
+
+```npm install```
+
+```npm run dev```
 
 
 
