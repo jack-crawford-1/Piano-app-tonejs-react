@@ -6,15 +6,15 @@ import Keyboard from './Keyboard'
 
 function App() {
   const synth = new Tone.PolySynth(Tone.AMSynth, {
-    harmonicity: 1.5,
+    harmonicity: 1.0,
     oscillator: {
-      type: 'sine',
+      type: 'square',
     },
     envelope: {
-      attack: 0.0001,
-      decay: 0.2,
-      sustain: 0.5,
-      release: 0.9,
+      attack: 0.001,
+      decay: 0.1,
+      sustain: 0.3,
+      release: 0.2,
     },
   }).toDestination()
 
@@ -92,17 +92,8 @@ function App() {
 
   return (
     <div className="piano">
-      <div className="AAA">
-        <h1>
-          Mini keyboard using
-          <img src="./ToneLogo.png" alt="tone.js" className="logo" />
-          and React
-          <img src="./ReactLogo.png" alt="react.js" className=" react-logo" />
-        </h1>
-      </div>
       <Keyboard playChord={playChord} />
       <div className="chords">
-        {/* <div>Chords: </div> */}
         {[
           'C',
           'D',
@@ -130,15 +121,6 @@ function App() {
             {chord}
           </span>
         ))}
-      </div>
-      <div className="instructions">
-        <p>
-          Use keyboard to play chords (C, D, E, F, G, A, B). <br /> To play
-          minor chords, press and hold 'm' before pressing the chord key. <br />{' '}
-          For seventh chords, press and hold '7'. e.g holding "m" + "g" will
-          play G minor
-        </p>
-        <p>Probably not the best experience on a mobile.</p>
       </div>
     </div>
   )
