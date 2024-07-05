@@ -28,9 +28,8 @@ It uses React's **state management and event handling** to manage key presses an
 
 
 
-![piano screenshot](image.png)
+![alt text](image-5.png)
 
-![alt text](image-4.png)
 
 ##
 
